@@ -56,6 +56,8 @@ onMount(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: 1rem 1rem;
+  background-image: radial-gradient(circle, #ccc 1px, transparent 1px);
 
   img {
     max-width: min(100%, 100vw);
