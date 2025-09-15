@@ -7,18 +7,31 @@ interface Props {
   value: any;
   min?: number;
   max?: number;
+  unit?: string;
 }
 
-let { label, value = $bindable(), min = 0, max = 1 }: Props = $props();
+let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
 
 </script>
 
 
-<div class="control">
+<div class="field">
   <div class="upper">
     <label for={label}>
       {@html label}
     </label>
+
+    <div class="input-container">
+      <input type="number"
+        bind:value
+      />
+
+      {#if unit}
+        <div class="unit">
+          {@html unit}
+        </div>
+      {/if}
+    </div>
   </div>
 
   <div class="lower">
@@ -32,9 +45,59 @@ let { label, value = $bindable(), min = 0, max = 1 }: Props = $props();
 
 <style lang="scss">
 
-.control {
+.field {
   display: flex;
   flex-flow: column nowrap;
+  align-items: stretch;
+  gap: 0.2rem;
+}
+
+
+.upper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  label {
+    @include font-ui;
+  }
+
+  .input-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+
+    input[type="number"] {
+      appearance: none;
+      width: 4em;
+      padding: 0.1em 0.5em;
+
+      @include font-flavour;
+      font-size: 100%;
+      background: rgb(black, 7%);
+      border: none;
+      border-radius: $border-radius;
+      outline: none;
+    }
+
+    .unit {
+      display: inline-block;
+      width: 1.5em;
+      padding-left: 0.25em;
+      @include font-ui;
+    }
+  }
+
+  input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+
+.lower {
+  input[type="range"] {
+    width: 100%;
+  }
 }
 
 </style>

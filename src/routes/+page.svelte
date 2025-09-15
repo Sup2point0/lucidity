@@ -9,11 +9,11 @@ import Controls from "./controls.svelte";
 
 
 <main>
-  <div class="window">
+  <div class="left">
     <Window />
   </div>
 
-  <div class="controls">
+  <div class="right">
     <Controls />
   </div>
 </main>
@@ -29,17 +29,15 @@ main {
   flex-flow: row nowrap;
 }
 
-.window {
+.left {
   // flex-grow: 3;
   width: 80vw;
 }
 
-.controls {
+.right {
   // flex-grow: 2;
   width: 20vw;
-  padding: 1rem 1.5rem;
-  overflow-y: auto;
-  background: rgb(black, 5%);
+  position: relative;
 }
 
 </style>

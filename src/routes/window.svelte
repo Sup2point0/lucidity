@@ -34,12 +34,14 @@ onMount(() => {
   }
 }} />
 
-<div class="img-container">
+<div class="window">
   <img bind:this={pict_view}
     alt=""
     src={$pict}
     style:filter="
+      hue-rotate({$effects.hue}deg)
       blur({$effects.blur}px)
+      brightness({$effects.brightness}%)
     "
   />
 </div>
@@ -47,10 +49,10 @@ onMount(() => {
 
 <style lang="scss">
 
-.img-container {
+.window {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   justify-content: center;
   align-items: center;

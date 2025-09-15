@@ -1,0 +1,9 @@
+@mixin font-ui {
+  font-family: 'Atkinson Hyperlegible Next', 'Segoe UI', system-ui, sans-serif;
+  font-weight: normal;
+}
+
+@mixin font-flavour {
+  font-family: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  font-weight: normal;
+}
