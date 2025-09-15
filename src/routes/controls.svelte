@@ -17,7 +17,7 @@ import Slider from "#parts/slider.svelte";
     <header>
       <h2> Effects </h2>
 
-      <Clicky text="Reset" action={$effects.reset} />
+      <Clicky text="Reset" action={() => $effects.reset()} />
     </header>
     
     <div class="fields">
@@ -79,14 +79,13 @@ import Slider from "#parts/slider.svelte";
 
 
 header {
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
 
   h2 {
-    padding-bottom: 0.5em;
     @include font-ui;
     font-weight: 500;
     font-size: 150%;

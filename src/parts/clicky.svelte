@@ -28,11 +28,17 @@ button {
   border: none;
   border-radius: $border-radius;
   outline: none;
-  transition: background 0.1s ease-out;
+  transition: #{trans()};
 
   &:hover, &:focus-visible {
     cursor: pointer;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
     background: oklch(0.8 0.1202 57.71 / 60%);
+  }
+
+  &:active {
+    transform: scale(92%);
   }
 }
 

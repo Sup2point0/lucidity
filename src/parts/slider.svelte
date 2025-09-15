@@ -23,6 +23,7 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
 
     <div class="input-container">
       <input type="number"
+        id={label}
         bind:value
       />
 
@@ -60,6 +61,10 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
 
   label {
     @include font-ui;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .input-container {
@@ -78,6 +83,16 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
       border: none;
       border-radius: $border-radius;
       outline: none;
+      transition: #{trans()};
+
+      &:hover {
+        background: rgb(black, 12%);
+      }
+
+      &:active {
+        background: rgb(black, 16%);
+        transform: scale(97%);
+      }
     }
 
     .unit {
