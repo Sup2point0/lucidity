@@ -19,25 +19,30 @@ let { text, action }: Props = $props();
 
 <style lang="scss">
 
+@use 'sass:color';
+
+
 button {
   padding: 0.2em 0.5em;
   @include font-ui;
   font-size: 100%;
-  color: $col-trit-dark;
-  background: oklch(0.8 0.1202 57.71 / 30%);
+  color: white;
+  background: color.change($col-purp, $alpha: 0.8);
   border: none;
   border-radius: $border-radius;
   outline: none;
+  box-shadow: 0 2px 4px rgb(black, 10%);
   transition: #{trans()};
 
   &:hover, &:focus-visible {
     cursor: pointer;
     padding-left: 0.6em;
     padding-right: 0.6em;
-    background: oklch(0.8 0.1202 57.71 / 60%);
+    background: color.adjust($col-purp, $lightness: -0.05);
   }
 
   &:active {
+    background: color.adjust($col-purp, $lightness: -0.15);
     transform: scale(92%);
   }
 }

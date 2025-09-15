@@ -2,7 +2,7 @@
 
 <script lang="ts">
 
-import { effects } from "#scripts/stores";
+import { effects, toasts } from "#scripts/stores";
 
 import Clicky from "#parts/clicky.svelte";
 import Slider from "#parts/slider.svelte";
@@ -17,7 +17,12 @@ import Slider from "#parts/slider.svelte";
     <header>
       <h2> Effects </h2>
 
-      <Clicky text="Reset" action={() => $effects.reset()} />
+      <Clicky text="Reset" action={() => {
+        $effects.reset();
+        $toasts.new_toast({
+          kind: "success", text: "Reset image effects!"
+        })
+      }} />
     </header>
     
     <div class="fields">
@@ -51,7 +56,7 @@ import Slider from "#parts/slider.svelte";
 .controls {
   width: 100%;
   height: 100%;
-  padding: 1rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   position: relative;
   overflow-y: auto;
   background: rgb(white, 80%);
@@ -71,8 +76,8 @@ import Slider from "#parts/slider.svelte";
   z-index: -1;
   background: linear-gradient(
     to bottom in oklch,
-    oklch(0.8691 0.1202 78.88),
-    oklch(0.8691 0.1202 327.7)
+    $col-orange,
+    $col-pink
   );
   box-shadow: 0 0 5px rgb(black, 8%);
 }

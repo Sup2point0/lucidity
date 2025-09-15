@@ -70,7 +70,7 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
   .input-container {
     display: flex;
     flex-flow: row nowrap;
-    align-items: stretch;
+    align-items: end;
 
     input[type="number"] {
       appearance: none;
@@ -79,18 +79,18 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
 
       @include font-flavour;
       font-size: 100%;
-      background: rgb(black, 7%);
+      background: rgb(black, 5%);
       border: none;
       border-radius: $border-radius;
       outline: none;
       transition: #{trans()};
 
       &:hover {
-        background: rgb(black, 12%);
+        background: rgb(black, 10%);
       }
 
       &:active {
-        background: rgb(black, 16%);
+        background: rgb(black, 20%);
         transform: scale(97%);
       }
     }
@@ -100,6 +100,7 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
       width: 1.5em;
       padding-left: 0.25em;
       @include font-ui;
+      font-size: 90%;
     }
   }
 
