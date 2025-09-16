@@ -4,6 +4,7 @@
 
 import { pict, view, effects, prefs, toasts } from "#scripts/stores";
 
+import Upload from "#parts/upload.svelte";
 import Clicky from "#parts/clicky.svelte";
 import Slider from "#parts/slider.svelte";
 import Checkbox from "#parts/checkbox.svelte";
@@ -28,7 +29,7 @@ import Dropdown from "#parts/dropdown.svelte";
     </header>
 
     <div class="fields">
-      <input type="file">
+      <Upload />
     </div>
   </section>
 

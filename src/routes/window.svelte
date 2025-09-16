@@ -17,7 +17,9 @@ onMount(() => {
   reader = new FileReader();
 
   reader.onloadstart = e => {
-    $pict!.src = null;
+    if ($pict) {
+      $pict.src = null;
+    }
   };
   
   reader.onload = e => {
