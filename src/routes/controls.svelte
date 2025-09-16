@@ -7,6 +7,7 @@ import { pict, view, effects, prefs, toasts } from "#scripts/stores";
 import Clicky from "#parts/clicky.svelte";
 import Slider from "#parts/slider.svelte";
 import Checkbox from "#parts/checkbox.svelte";
+import Dropdown from "#parts/dropdown.svelte";
 
 </script>
 
@@ -104,6 +105,11 @@ import Checkbox from "#parts/checkbox.svelte";
     <div class="fields">
       <Checkbox label="Confirm before pasting image"
         bind:value={$prefs.confirm_before_paste}
+      />
+
+      <Dropdown label="Backdrop style"
+        bind:value={$prefs.backdrop_style}
+        options={["dots", "grid"]}
       />
     </div>
   </section>

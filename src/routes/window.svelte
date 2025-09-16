@@ -7,7 +7,7 @@ import { PictureData } from "#scripts/stores/pict.svelte";
 import { load_pict_from_clipboard } from "#scripts/load";
 
 import { onMount } from "svelte";
-import { scale, slide } from "svelte/transition";
+import { scale } from "svelte/transition";
 import { expoOut } from "svelte/easing";
 
 
@@ -44,7 +44,7 @@ onMount(() => {
   load_pict_from_clipboard(e, reader);
 }} />
 
-<div class="window">
+<div class="window {$prefs.backdrop_style}">
   {#key $pict?.src}
     <img
       alt=""
@@ -66,6 +66,12 @@ onMount(() => {
 
 <style lang="scss">
 
+@property --col {
+  syntax: '<color>';
+  initial-value: 'transparent';
+  inherits: false;
+}
+
 .window {
   width: 100%;
   height: 100%;
@@ -76,9 +82,21 @@ onMount(() => {
   background-size: 1rem 1rem;
   --col: #ddd;
   background-image: radial-gradient(circle, var(--col) 1px, transparent 1px);
+  transition: --col 0.1s ease-out;
 
   &:hover {
-    --col: #ccc
+    --col: #ccc;
+  }
+
+  &.grid {
+    --col: #eee;
+    background-image:
+      linear-gradient(to right, var(--col) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--col) 1px, transparent 1px);
+    
+    &:hover {
+      --col: #eaeaea;
+    }
   }
 }
 

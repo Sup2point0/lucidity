@@ -1,13 +1,14 @@
-<!-- @component Checkbox -->
+<!-- @component Dropdown -->
 
 <script lang="ts">
 
 interface Props {
   value: any;
+  options: any[];
   label: string;
 }
 
-let { value = $bindable(), label }: Props = $props();
+let { value = $bindable(), options, label }: Props = $props();
 
 </script>
 
@@ -17,10 +18,11 @@ let { value = $bindable(), label }: Props = $props();
     {@html label}
   </label>
 
-  <input type="checkbox"
-    id={label}
-    bind:checked={value}
-  />
+  <select id={label} bind:value>
+    {#each options as option}
+      <option> {option} </option>
+    {/each}
+  </select>
 </div>
 
 
@@ -28,7 +30,7 @@ let { value = $bindable(), label }: Props = $props();
 
 .field {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: stretch;
   gap: 0.2rem;
