@@ -6,6 +6,8 @@ import { view, pict, effects, prefs, toasts } from "#scripts/stores";
 import { PictureData } from "#scripts/stores/pict.svelte";
 import { load_pict_from_clipboard } from "#scripts/load";
 
+import Instructions from "./instructions.svelte";
+
 import { onMount } from "svelte";
 import { scale } from "svelte/transition";
 import { expoOut } from "svelte/easing";
@@ -39,8 +41,8 @@ onMount(() => {
 
 
 <svelte:document onpaste={e => {
-  if ($prefs.confirm_before_paste) {
-    if (!window.confirm("Paste image from clipboard?")) return;
+  if ($prefs.confirm_before_paste && $pict !== null) {
+    if (!window.confirm("Paste image from clipboard? This will overwrite the current image.")) return;
   }
 
   load_pict_from_clipboard(e, reader);
@@ -63,6 +65,10 @@ onMount(() => {
       out:scale={{ duration: ($pict === null) ? 500 : 0, start: 0.95, easing: expoOut }}
     />
   {/key}
+
+  {#if $pict === null}
+    <Instructions />
+  {/if}
 </div>
 
 
@@ -77,10 +83,11 @@ onMount(() => {
 .window {
   width: 100%;
   height: 100%;
-  overflow: auto;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
   background-size: 1rem 1rem;
   --col: #ddd;
   background-image: radial-gradient(circle, var(--col) 1px, transparent 1px);

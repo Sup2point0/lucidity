@@ -16,7 +16,7 @@ import Dropdown from "#parts/dropdown.svelte";
 
 <div id="back"></div>
 
-<div class="controls">
+<aside class="controls">
   <section>
     <header>
       <h2> Image </h2>
@@ -131,12 +131,12 @@ import Dropdown from "#parts/dropdown.svelte";
       />
     </div>
   </section>
-</div>
+</aside>
 
 
 <style lang="scss">
 
-.controls {
+aside.controls {
   width: 100%;
   height: 100%;
   padding: 1.2rem 1.5rem;
