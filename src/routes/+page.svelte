@@ -31,6 +31,8 @@ import Toast from "#parts/toast.svelte";
 
 <style lang="scss">
 
+$controls-max-width: 24rem;
+
 main {
   width: 100vw;
   height: 100vh;
@@ -41,12 +43,16 @@ main {
 
 .left {
   // flex-grow: 3;
-  width: 80vw;
+  min-width: calc(100vw - $controls-max-width);
+  resize: horizontal;
+  overflow: auto;
 }
 
 .right {
+  flex: 1;
   // flex-grow: 2;
-  width: 20vw;
+  min-width: 16rem;
+  max-width: $controls-max-width;
   position: relative;
 }
 
