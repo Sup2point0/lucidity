@@ -2,7 +2,7 @@
   
 import "#styles/essence.scss";
 
-import { toasts } from "#scripts/stores";
+import { prefs, toasts } from "#scripts/stores";
 
 import Window from "./window.svelte";
 import Controls from "./controls.svelte";
@@ -13,7 +13,7 @@ import Toast from "#parts/toast.svelte";
 
 
 <main>
-  <div class="left">
+  <div class="left {$prefs.pane_width}">
     <Window />
   </div>
 
@@ -31,6 +31,8 @@ import Toast from "#parts/toast.svelte";
 
 <style lang="scss">
 
+$controls-min-width: 16rem;
+$controls-init-width: 17rem;
 $controls-max-width: 24rem;
 
 main {
@@ -42,16 +44,18 @@ main {
 }
 
 .left {
-  // flex-grow: 3;
+  width: calc(100vw - $controls-init-width);
   min-width: calc(100vw - $controls-max-width);
   resize: horizontal;
   overflow: auto;
+
+  &.min { width: calc(100vw - $controls-min-width); }
+  &.max { width: calc(100vw - $controls-max-width); }
 }
 
 .right {
   flex: 1;
-  // flex-grow: 2;
-  min-width: 16rem;
+  min-width: $controls-min-width;
   max-width: $controls-max-width;
   position: relative;
 }

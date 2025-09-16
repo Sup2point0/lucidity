@@ -103,13 +103,25 @@ import Dropdown from "#parts/dropdown.svelte";
     </header>
 
     <div class="fields">
-      <Checkbox label="Confirm before pasting image"
+      <Checkbox label="Confirm before paste"
         bind:value={$prefs.confirm_before_paste}
       />
 
       <Dropdown label="Backdrop style"
         bind:value={$prefs.backdrop_style}
-        options={["dots", "grid"]}
+        options={{
+          "dots": "Dotted",
+          "grid": "Gridded",
+        }}
+      />
+
+      <Dropdown label="Pane width"
+        bind:value={$prefs.pane_width}
+        options={{
+          "default": "Default",
+          "min": "Minimised",
+          "max": "Expanded",
+        }}
       />
     </div>
   </section>

@@ -4,7 +4,9 @@
 
 interface Props {
   value: any;
-  options: any[];
+  options: {
+    [key: string]: string;
+  };
   label: string;
 }
 
@@ -19,8 +21,8 @@ let { value = $bindable(), options, label }: Props = $props();
   </label>
 
   <select id={label} bind:value>
-    {#each options as option}
-      <option> {option} </option>
+    {#each Object.entries(options) as [value, label]}
+      <option {value}> {@html label} </option>
     {/each}
   </select>
 </div>
@@ -41,6 +43,24 @@ label {
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+select {
+  height: 2em;
+  @include font-ui;
+  font-size: 80%;
+  background: rgb(white, 50%);
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+
+  &:hover {
+    cursor: pointer;
+    background: rgb(white, 80%);
+  }
+
+  &:active {
+    background: rgb(#ccc, 20%);
   }
 }
 
