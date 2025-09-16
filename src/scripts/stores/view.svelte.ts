@@ -1,7 +1,9 @@
 import { writable } from "svelte/store";
 
+import { Resettable } from "#scripts/types";
 
-export class Viewport
+
+export class Viewport extends Resettable
 {
   zoom: number = $state(100);
 

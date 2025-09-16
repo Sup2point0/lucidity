@@ -1,13 +1,15 @@
 import { writable } from "svelte/store";
 
+import { Resettable } from "#scripts/types";
 
-export class PictureEffects
+
+export class PictureEffects extends Resettable
 {
   blur: number = $state(0);
   brightness: number = $state(100);
   hue: number = $state(0);
 
-  reset(): void
+  reset()
   {
     this.blur = 0;
     this.brightness = 100;

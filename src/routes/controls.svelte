@@ -3,6 +3,7 @@
 <script lang="ts">
 
 import { pict, view, effects, prefs, toasts } from "#scripts/stores";
+import { Viewport, PictureEffects } from "#scripts/types";
 
 import Upload from "#parts/upload.svelte";
 import Clicky from "#parts/clicky.svelte";
@@ -50,6 +51,7 @@ import Dropdown from "#parts/dropdown.svelte";
         bind:value={$view.zoom}
         min={10}
         max={200}
+        reset={Viewport.defaults.zoom}
         unit="%"
       />
     </div>
@@ -72,6 +74,7 @@ import Dropdown from "#parts/dropdown.svelte";
         bind:value={$effects.blur}
         min={0}
         max={20}
+        reset={PictureEffects.defaults.blur}
         unit="px"
       />
 
@@ -79,6 +82,7 @@ import Dropdown from "#parts/dropdown.svelte";
         bind:value={$effects.brightness}
         min={0}
         max={200}
+        reset={PictureEffects.defaults.brightness}
         unit="%"
       />
 
@@ -86,6 +90,7 @@ import Dropdown from "#parts/dropdown.svelte";
         bind:value={$effects.hue}
         min={0}
         max={360}
+        reset={PictureEffects.defaults.hue}
         unit="°"
       />
     </div>

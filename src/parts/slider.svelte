@@ -7,10 +7,11 @@ interface Props {
   value: any;
   min?: number;
   max?: number;
+  reset: number;
   unit?: string;
 }
 
-let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
+let { label, value = $bindable(), min = 0, max = 1, reset, unit }: Props = $props();
 
 </script>
 
@@ -25,6 +26,11 @@ let { label, value = $bindable(), min = 0, max = 1, unit }: Props = $props();
       <input type="number"
         id={label}
         bind:value
+        onblur={() => {
+          if (value === null) {
+            value = reset;
+          }
+        }}
       />
 
       {#if unit}
