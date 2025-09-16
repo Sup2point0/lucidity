@@ -2,18 +2,23 @@
 
 <script lang="ts">
 
-import { view, pict, effects, toasts } from "#scripts/stores";
+import { view, pict, effects, prefs, toasts } from "#scripts/stores";
 import { PictureData } from "#scripts/stores/pict.svelte";
 import { load_pict_from_clipboard } from "#scripts/load";
 
 import { onMount } from "svelte";
+import { scale, slide } from "svelte/transition";
+import { expoOut } from "svelte/easing";
 
 
-let pict_view: HTMLImageElement;
 let reader: FileReader;
 
 onMount(() => {
   reader = new FileReader();
+
+  reader.onloadstart = e => {
+    $pict!.src = null;
+  };
   
   reader.onload = e => {
     let src = e.target?.result;
@@ -31,21 +36,31 @@ onMount(() => {
 </script>
 
 
-<svelte:document onpaste={e => load_pict_from_clipboard(e, reader)} />
+<svelte:document onpaste={e => {
+  if ($prefs.confirm_before_paste) {
+    if (!window.confirm("Paste image from clipboard?")) return;
+  }
+
+  load_pict_from_clipboard(e, reader);
+}} />
 
 <div class="window">
-  <img bind:this={pict_view}
-    alt=""
-    src={$pict?.src}
-    style:filter="
-      hue-rotate({$effects.hue}deg)
-      blur({$effects.blur}px)
-      brightness({$effects.brightness}%)
-    "
-    style:transform="
-      scale({$view.zoom}%)
-    "
-  />
+  {#key $pict?.src}
+    <img
+      alt=""
+      src={$pict?.src}
+      style:filter="
+        hue-rotate({$effects.hue}deg)
+        blur({$effects.blur}px)
+        brightness({$effects.brightness}%)
+      "
+      style:transform="
+        scale({$view.zoom}%)
+      "
+      in:scale={{ duration: 500, start: 0.95, easing: expoOut }}
+      out:scale={{ duration: ($pict === null) ? 500 : 0, start: 0.95, easing: expoOut }}
+    />
+  {/key}
 </div>
 
 
@@ -65,11 +80,11 @@ onMount(() => {
   &:hover {
     --col: #ccc
   }
+}
 
-  img {
-    max-width: min(95%, 100vw);
-    max-height: min(95%, 100vh);
-  }
+img {
+  max-width: min(95%, 100vw);
+  max-height: min(95%, 100vh);
 }
 
 </style>

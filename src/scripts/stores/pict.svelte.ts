@@ -5,7 +5,7 @@ type Origin = "clipboard" | "upload";
 
 
 export class PictureData {
-  src: string = $state("");
+  src: string | null = $state(null);
   origin: Origin = $state("clipboard");
 
   constructor(src: string, origin: Origin)

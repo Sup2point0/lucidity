@@ -2,10 +2,11 @@
 
 <script lang="ts">
 
-import { pict, view, effects, toasts } from "#scripts/stores";
+import { pict, view, effects, prefs, toasts } from "#scripts/stores";
 
 import Clicky from "#parts/clicky.svelte";
 import Slider from "#parts/slider.svelte";
+import Checkbox from "#parts/checkbox.svelte";
 
 </script>
 
@@ -84,6 +85,25 @@ import Slider from "#parts/slider.svelte";
         min={0}
         max={360}
         unit="°"
+      />
+    </div>
+  </section>
+
+  <section>
+    <header>
+      <h2> Preferences </h2>
+
+      <Clicky text="Reset" action={() => {
+        $prefs.reset();
+        $toasts.new_toast({
+          kind: "success", text: "Reset preferences to defaults."
+        });
+      }} />
+    </header>
+
+    <div class="fields">
+      <Checkbox label="Confirm before pasting image"
+        bind:value={$prefs.confirm_before_paste}
       />
     </div>
   </section>

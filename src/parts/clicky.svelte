@@ -31,7 +31,6 @@ button {
   border: none;
   border-radius: $border-radius;
   outline: none;
-  box-shadow: 0 2px 4px rgb(black, 10%);
   transition: #{trans()};
 
   &:hover, &:focus-visible {
