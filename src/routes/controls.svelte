@@ -131,10 +131,19 @@ import Dropdown from "#parts/dropdown.svelte";
       />
     </div>
   </section>
+
+  <footer>
+    Lucidity by <a target="_blank" href="https://github.com/Sup2point0">Sup#2.0</a> <br>
+    built with <a target="_blank" href="https://svelte.dev/">Svelte</a>/<a target="_blank" href="https://svelte.dev/docs/kit/">Kit</a> <br>
+    source code on <a target="_blank" href="https://github.com/Sup2point0/lucidity">GitHub</a>
+  </footer>
 </aside>
 
 
 <style lang="scss">
+
+@use 'sass:color';
+
 
 aside.controls {
   width: 100%;
@@ -187,6 +196,22 @@ section {
     display: flex;
     flex-flow: column nowrap;
     gap: 1rem;
+  }
+}
+
+footer {
+  font-size: 80%;
+  line-height: 160%;
+  text-align: right;
+
+  a {
+    color: $col-purp;
+    text-decoration: none;
+
+    &:hover, &:focus-visible {
+      color: color.adjust($col-pink, $lightness: -0.1);
+      text-decoration: underline;
+    }
   }
 }
 
