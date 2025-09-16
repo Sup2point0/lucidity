@@ -23,7 +23,7 @@ let { toast }: Props = $props();
   out:slide={{ duration: 500, easing: expoOut, delay: 250 }}
 >
   <button class={toast.kind}
-    onclick={() => $toasts.clear_toast(toast.id)}
+    onclick={() => { $toasts.active = []; }}
     in:scale={{ duration: 500, start: 0.6, easing: expoOut, delay: 250 }}
     out:scale={{ duration: 500, start: 0.9, easing: expoOut }}
   >

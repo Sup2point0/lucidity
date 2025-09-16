@@ -2,7 +2,7 @@
 
 <script lang="ts">
 
-import { effects, toasts } from "#scripts/stores";
+import { pict, view, effects, toasts } from "#scripts/stores";
 
 import Clicky from "#parts/clicky.svelte";
 import Slider from "#parts/slider.svelte";
@@ -15,13 +15,52 @@ import Slider from "#parts/slider.svelte";
 <div class="controls">
   <section>
     <header>
+      <h2> Image </h2>
+
+      <Clicky text="Clear" action={() => {
+        $pict = null;
+        $toasts.new_toast({
+          kind: "success", text: "Cleared image."
+        });
+      }} />
+    </header>
+
+    <div class="fields">
+      <input type="file">
+    </div>
+  </section>
+
+  <section>
+    <header>
+      <h2> Viewport </h2>
+
+      <Clicky text="Reset" action={() => {
+        $view.reset();
+        $toasts.new_toast({
+          kind: "success", text: "Reset viewport."
+        });
+      }} />
+    </header>
+
+    <div class="fields">
+      <Slider label="Zoom"
+        bind:value={$view.zoom}
+        min={10}
+        max={200}
+        unit="%"
+      />
+    </div>
+  </section>
+
+  <section>
+    <header>
       <h2> Effects </h2>
 
       <Clicky text="Reset" action={() => {
         $effects.reset();
         $toasts.new_toast({
-          kind: "success", text: "Reset image effects!"
-        })
+          kind: "success", text: "Reset image effects."
+        });
       }} />
     </header>
     
@@ -83,27 +122,27 @@ import Slider from "#parts/slider.svelte";
 }
 
 
-header {
-  padding-bottom: 2rem;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
+section {
+  padding-bottom: 2.5rem;
 
-  h2 {
-    @include font-ui;
-    font-weight: 500;
-    font-size: 150%;
+  header {
+    padding-bottom: 1.5rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      @include font-ui;
+      font-weight: 300;
+      font-size: 150%;
+    }
   }
-}
 
-
-.fields {
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 1rem;
-  
-  section {
+  .fields {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
   }
 }
 

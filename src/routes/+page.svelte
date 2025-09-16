@@ -53,9 +53,10 @@ main {
 .toasts {
   position: fixed;
   left: 50%;
-  bottom: 1rem;
+  bottom: 1.5rem;
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   transform: translateX(-50%);
 }
 

@@ -2,7 +2,8 @@
 
 <script lang="ts">
 
-import { pict, effects } from "#scripts/stores";
+import { view, pict, effects, toasts } from "#scripts/stores";
+import { PictureData } from "#scripts/stores/pict.svelte";
 import { load_pict_from_clipboard } from "#scripts/load";
 
 import { onMount } from "svelte";
@@ -18,7 +19,11 @@ onMount(() => {
     let src = e.target?.result;
 
     if (src && typeof(src === "string")) {
-      pict_view.src = src as string;
+      $pict = new PictureData(src as string, "clipboard");
+      
+      $toasts.new_toast({
+        kind: "success", text: "Pasted from clipboard"
+      });
     }
   };
 });
@@ -26,22 +31,19 @@ onMount(() => {
 </script>
 
 
-<svelte:document onpaste={e => {
-  let data = load_pict_from_clipboard(e, reader);
-
-  if (data) {
-    $pict = data;
-  }
-}} />
+<svelte:document onpaste={e => load_pict_from_clipboard(e, reader)} />
 
 <div class="window">
   <img bind:this={pict_view}
     alt=""
-    src={$pict}
+    src={$pict?.src}
     style:filter="
       hue-rotate({$effects.hue}deg)
       blur({$effects.blur}px)
       brightness({$effects.brightness}%)
+    "
+    style:transform="
+      scale({$view.zoom}%)
     "
   />
 </div>
@@ -57,11 +59,16 @@ onMount(() => {
   justify-content: center;
   align-items: center;
   background-size: 1rem 1rem;
-  background-image: radial-gradient(circle, #ccc 1px, transparent 1px);
+  --col: #ddd;
+  background-image: radial-gradient(circle, var(--col) 1px, transparent 1px);
+
+  &:hover {
+    --col: #ccc
+  }
 
   img {
-    max-width: min(100%, 100vw);
-    max-height: min(100%, 100vh);
+    max-width: min(95%, 100vw);
+    max-height: min(95%, 100vh);
   }
 }
 
